@@ -1,0 +1,55 @@
+# Snaply AI-OS v2.0.0 — System Configuration
+
+system:
+  name: "Snaply AI-OS"
+  version: "2.0.0"
+  admin: "salahnbilii"
+
+self_heal:
+  enabled: true
+  health_check_interval_seconds: 30
+  max_restore_time_seconds: 120
+
+backup:
+  enabled: true
+  interval_minutes: 15
+  destinations:
+    - type: "github"
+      repo: "salahnbilii-arch/snaply-backup"
+    - type: "encrypted_file"
+      path: "/vault/"
+    - type: "local"
+      path: "/backup/"
+
+moderator:
+  enabled: true
+  scan_interval_seconds: 5
+  auto_actions:
+    - "remove violating content"
+    - "suspend severe accounts"
+    - "flag for admin review"
+    - "report CSAM to NCMEC"
+
+security:
+  enabled: true
+  monitor:
+    - "brute force login attempts"
+    - "SQL injection attempts"
+    - "unusual traffic spikes"
+
+email:
+  enabled: true
+  templates: 13
+
+appeal:
+  enabled: true
+  max_auto_review_depth: 2
+  tier_3_requires: "admin_approval"
+
+telegram:
+  enabled: true
+  report_interval_minutes: 60
+
+admin:
+  panel_password: "${SNAPLY_ADMIN_PASSWORD}"
+  two_factor: true
